@@ -1,0 +1,5 @@
+# ASP for FCA
+Various ASP codes implementing FCA-related searchs.
+
+See [concept-generation](https://github.com/Aluriak/concept-generation)
+for a complete listing and benchmarking of various ways to implement the formal concept search.
