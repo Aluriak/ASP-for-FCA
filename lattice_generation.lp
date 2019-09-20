@@ -20,9 +20,9 @@ under(C1,C3):- smaller(C1,C3) ; not concept(C2): smaller(C1,C2) , smaller(C2,C3)
 
 % Alternative 1
 % under(C1,C3):- smaller(C1,C3) ; not under(C1,C2): smaller(C2,C3).
-% Alternative 2
+% Alternative 2  (does not work)
 % under(C1,C3):- ext(C1,X): ext(C2,X) ; not under(C1,C2): ext(C2,X): ext(C3,X).
-% Alternative 3
+% Alternative 3  (does not work)
 % under(C1,C3):- concept(C1) ; concept(C3) ; ext(C1,X): ext(C3,X) ; not under(C1,C2): under(C2,C3).
 
 
