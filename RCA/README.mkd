@@ -1,0 +1,44 @@
+# Relational concept analysis (RCA) in ASP
+
+Reproduction of the running example of (1)
+"Relational concept analysis: mining concept lattices from multi-relational data" (Rouane-Hacene et al.),
+referenced as "the RCA paper" in the source code,
+
+and (2) "AOC-posets: a scalable alternative to Concept Lattices for Relational Concept Analysis" (Dolques et al.),
+referenced as "the AOC-RCA paper" in the source code
+
+
+## Example: Drugs
+Data are not yet reproduced in ASP.
+
+The running example of the RCA paper is all about formal contexts:
+
+- `context-patients.lp`: patient × ADR
+- `context-drugs.lp`: drug × ADR
+
+And relations:
+
+- `relations-istakenby.lp`: drug × patient
+- `relations-takes.lp`: patient × drug
+- `relations-interactions.lp`: drug × drug
+
+
+## Example: Animals
+The running example of the AOC-RCA paper is all about formal contexts:
+
+- `context-animals.lp`: animal × attribute
+- `context-sites.lp`: site × chemical
+
+And relations:
+
+- `relations-contains.lp`: site × animal
+
+Data are found in the [`animals`](animals/) directory, and
+resulting relational concept lattices are seen in `out/animals.png` and `out/sites.png`.
+
+
+## Using that repo
+The python program [`rca.py`](rca.py) is implementing the RCA algorithm using ASP and [biseau](https://gitlab.inria.fr/lbourneu/biseau),
+outputing output lattices.
+
+See `Makefile` for running recipes.
