@@ -1,11 +1,19 @@
 # Relational concept analysis (RCA) in ASP
 
-Reproduction of the running example of (1)
-"Relational concept analysis: mining concept lattices from multi-relational data" (Rouane-Hacene et al.),
-referenced as "the RCA paper" in the source code,
+Reproduction of the running example of
 
-and (2) "AOC-posets: a scalable alternative to Concept Lattices for Relational Concept Analysis" (Dolques et al.),
-referenced as "the AOC-RCA paper" in the source code
+1. "Relational concept analysis: mining concept lattices from multi-relational data" (Rouane-Hacene et al.),
+referenced as "the RCA paper" in the source code, proposing a complete Drugs running example.
+
+2. "AOC-posets: a scalable alternative to Concept Lattices for Relational Concept Analysis" (Dolques et al.),
+referenced as "the AOC-RCA paper" in the source code, proposing a simple Animals running example.
+
+
+## Using that repo
+The python program [`rca.py`](rca.py) is implementing the RCA algorithm using ASP and [biseau](https://gitlab.inria.fr/lbourneu/biseau),
+outputing output lattices. Currently set to run the animals test case.
+
+See `Makefile` for running recipes.
 
 
 ## Example: Drugs
@@ -36,9 +44,18 @@ And relations:
 Data are found in the [`animals`](animals/) directory, and
 resulting relational concept lattices are seen in `out/animals.png` and `out/sites.png`.
 
+## incremental solving of the *Animals* example
+Because there is only one relation with *sites* as its domain, only the *site*
+context is modified during the process. And because that relation, namely *contains*
+as *animal* as a range, the relational extension of the *site* context depends of the static *animal* context.
+As a consequence, the formal concepts of *animal* are to be computed only once.
 
-## Using that repo
-The python program [`rca.py`](rca.py) is implementing the RCA algorithm using ASP and [biseau](https://gitlab.inria.fr/lbourneu/biseau),
-outputing output lattices.
+It is therefore possible to encode the RCA search incrementally with clingo alone,
+since no external treatment (mining concepts) is needed.
 
-See `Makefile` for running recipes.
+This implementation is found in [`rca-simple-in-incmode.lp`](rca-simple-in-incmode.lp),
+where the code is specifically written to handle the *site* context evolution.
+Results are to be compared with the lattice found by the python/asp implementation.
+
+Using the external API of clingo, it would be possible to externalize the concept mining,
+thus enabling the RCA process in an arbitrary number of contexts and relations.
